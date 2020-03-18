@@ -3,6 +3,8 @@ package service;
 import entity.Location;
 import entity.Movie;
 import entity.User;
+import org.junit.Assert;
+import org.junit.Test;
 import util.DataUtils;
 
 import java.util.Date;
@@ -29,7 +31,8 @@ public class LocationService {
         return location;
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         //scenario
         LocationService locationService = new LocationService();
         User user = new User("");
@@ -39,9 +42,9 @@ public class LocationService {
         Location location = locationService.rentMovie(user, movie);
 
         //verification
-        System.out.println(location.getValue() == 5.0);
-        System.out.println(DataUtils.isSameDate(location.getLocationDate(), new Date()));
-        System.out.println(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)));
+        Assert.assertTrue(location.getValue() == 5.0);
+        Assert.assertTrue(DataUtils.isSameDate(location.getLocationDate(), new Date()));
+        Assert.assertTrue(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)));
 
     }
 }
