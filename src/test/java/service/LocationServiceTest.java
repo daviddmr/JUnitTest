@@ -5,13 +5,19 @@ import entity.Movie;
 import entity.User;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 import util.DataUtils;
 
 import java.util.Date;
-import java.util.regex.Matcher;
 
 public class LocationServiceTest {
+
+    //Used do detect more than one error in the same scope
+    //Asserts are not able to recognize possible errors after the first
+    @Rule
+    public ErrorCollector errorCollector = new ErrorCollector();
 
     @Test
     public void test() {
@@ -26,11 +32,14 @@ public class LocationServiceTest {
         //verification
         Assert.assertEquals(5.0, location.getValue(), 0.1);
         Assert.assertThat(location.getValue(), CoreMatchers.is(CoreMatchers.equalTo(5.0)));
+        errorCollector.checkThat(location.getValue(), CoreMatchers.is(CoreMatchers.equalTo(5.0)));
 
         Assert.assertTrue(DataUtils.isSameDate(location.getLocationDate(), new Date()));
         Assert.assertThat(DataUtils.isSameDate(location.getLocationDate(), new Date()), CoreMatchers.is(true));
+        errorCollector.checkThat(DataUtils.isSameDate(location.getLocationDate(), new Date()), CoreMatchers.is(true));
 
         Assert.assertTrue(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)));
         Assert.assertThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
+        errorCollector.checkThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
     }
 }
