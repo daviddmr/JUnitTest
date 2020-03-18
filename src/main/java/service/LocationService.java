@@ -11,9 +11,9 @@ import java.util.Date;
 
 import static util.DataUtils.addDays;
 
-public class LocationService {
+class LocationService {
 
-    private Location rentMovie(User user, Movie movie) {
+    Location rentMovie(User user, Movie movie) {
         Location location = new Location();
         location.setMovie(movie);
         location.setUser(user);
@@ -29,22 +29,5 @@ public class LocationService {
         //TODO adicionar método para salvar
 
         return location;
-    }
-
-    @Test
-    public void test() {
-        //scenario
-        LocationService locationService = new LocationService();
-        User user = new User("");
-        Movie movie = new Movie("Movie 1", 2, 5.0);
-
-        //action
-        Location location = locationService.rentMovie(user, movie);
-
-        //verification
-        Assert.assertTrue(location.getValue() == 5.0);
-        Assert.assertTrue(DataUtils.isSameDate(location.getLocationDate(), new Date()));
-        Assert.assertTrue(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)));
-
     }
 }
