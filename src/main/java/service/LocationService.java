@@ -3,6 +3,7 @@ package service;
 import entity.Location;
 import entity.Movie;
 import entity.User;
+import exception.MovieOutOfStockException;
 import org.junit.Assert;
 import org.junit.Test;
 import util.DataUtils;
@@ -16,7 +17,7 @@ class LocationService {
     Location rentMovie(User user, Movie movie) throws Exception {
 
         if (movie.getStock() == 0) {
-            throw new Exception("Movie out of stock");
+            throw new MovieOutOfStockException();
         }
 
         Location location = new Location();

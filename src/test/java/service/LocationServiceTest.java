@@ -3,6 +3,7 @@ package service;
 import entity.Location;
 import entity.Movie;
 import entity.User;
+import exception.MovieOutOfStockException;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -48,7 +49,7 @@ public class LocationServiceTest {
         errorCollector.checkThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = MovieOutOfStockException.class)
     public void testMovieWithoutStockWithElegantException() throws Exception {
         //scenario
         LocationService locationService = new LocationService();
