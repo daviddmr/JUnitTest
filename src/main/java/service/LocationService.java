@@ -13,20 +13,22 @@ import static util.DataUtils.addDays;
 
 class LocationService {
 
-    Location rentMovie(User user, Movie movie) {
+    Location rentMovie(User user, Movie movie) throws Exception {
+
+        if (movie.getStock() == 0) {
+            throw new Exception("Movie out of stock");
+        }
+
         Location location = new Location();
         location.setMovie(movie);
         location.setUser(user);
         location.setLocationDate(new Date());
         location.setValue(movie.getLocationPrice());
 
-        //Entrega no dia seguinte
-        Date dataEntrega = new Date();
-        dataEntrega = addDays(dataEntrega, 1);
-        location.setReturnDate(dataEntrega);
-
-        //Salvando a location...
-        //TODO adicionar método para salvar
+        //Delivery next day
+        Date deliveryDate = new Date();
+        deliveryDate = addDays(deliveryDate, 1);
+        location.setReturnDate(deliveryDate);
 
         return location;
     }

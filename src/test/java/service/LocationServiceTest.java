@@ -20,7 +20,7 @@ public class LocationServiceTest {
     public ErrorCollector errorCollector = new ErrorCollector();
 
     @Test
-    public void test() {
+    public void test() throws Exception {
         //scenario
         LocationService locationService = new LocationService();
         User user = new User("");
@@ -41,5 +41,16 @@ public class LocationServiceTest {
         Assert.assertTrue(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)));
         Assert.assertThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
         errorCollector.checkThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
+    }
+
+    @Test(expected = Exception.class)
+    public void testMovieWithoutStockWithElegantException() throws Exception {
+        //scenario
+        LocationService locationService = new LocationService();
+        User user = new User("");
+        Movie movie = new Movie("Movie 1", 0, 5.0);
+
+        //action
+        locationService.rentMovie(user, movie);
     }
 }
