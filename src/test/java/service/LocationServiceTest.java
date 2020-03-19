@@ -33,6 +33,8 @@ public class LocationServiceTest {
 
     @Test
     public void shouldRentAMovie() throws Exception {
+        Assume.assumeFalse(DataUtils.checkWeekDay(new Date(), Calendar.SATURDAY));
+
         //scenario
         User user = new User("");
         List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 2, 5.0));
@@ -167,8 +169,9 @@ public class LocationServiceTest {
     }
 
     @Test
-    @Ignore
     public void shouldReturnOnlyOnMondayWhenRentAMovieOnSaturday() throws MovieOutOfStockException, VideoStoreException {
+        Assume.assumeTrue(DataUtils.checkWeekDay(new Date(), Calendar.SATURDAY));
+
         User user = new User("User 1");
         List<Movie> movieList = Arrays.asList(
                 new Movie("Movie 1", 2, 4.0),
