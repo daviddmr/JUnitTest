@@ -117,4 +117,20 @@ public class LocationServiceTest {
 
         Assert.assertThat(result.getValue(), CoreMatchers.is(11.0));
     }
+
+    @Test
+    public void shouldPay50PercentInTheFourthMovie() throws VideoStoreException, MovieOutOfStockException {
+
+        User user = new User("User 1");
+        List<Movie> movieList = Arrays.asList(
+                new Movie("Movie 1", 2, 4.0),
+                new Movie("Movie 2", 2, 4.0),
+                new Movie("Movie 3", 2, 4.0),
+                new Movie("Movie 4", 2, 4.0)
+        );
+
+        Location result = locationService.rentMovie(user, movieList);
+
+        Assert.assertThat(result.getValue(), CoreMatchers.is(13.0));
+    }
 }
