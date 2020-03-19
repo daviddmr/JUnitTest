@@ -79,17 +79,17 @@ public class LocationServiceTest {
         }
     }
 
+    //Modern exception
     @Test
-    public void testMovieWithoutStockWithModernException() throws Exception {
+    public void testLocation_MovieNullException() throws VideoStoreException, MovieOutOfStockException {
         //scenario
         LocationService locationService = new LocationService();
         User user = new User("");
-        Movie movie = new Movie("Movie 1", 0, 5.0);
 
-        expectedException.expect(Exception.class);
-        expectedException.expectMessage("Movie out of stock");
+        expectedException.expect(VideoStoreException.class);
+        expectedException.expectMessage("Movie null");
 
         //action
-        locationService.rentMovie(user, movie);
+        locationService.rentMovie(user, null);
     }
 }

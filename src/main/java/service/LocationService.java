@@ -5,9 +5,6 @@ import entity.Movie;
 import entity.User;
 import exception.MovieOutOfStockException;
 import exception.VideoStoreException;
-import org.junit.Assert;
-import org.junit.Test;
-import util.DataUtils;
 
 import java.util.Date;
 
@@ -17,12 +14,16 @@ class LocationService {
 
     Location rentMovie(User user, Movie movie) throws MovieOutOfStockException, VideoStoreException {
 
-        if (movie.getStock() == 0) {
-            throw new MovieOutOfStockException();
-        }
-
         if (user == null) {
             throw new VideoStoreException("User null");
+        }
+
+        if (movie == null) {
+            throw new VideoStoreException("Movie null");
+        }
+
+        if (movie.getStock() == 0) {
+            throw new MovieOutOfStockException();
         }
 
         Location location = new Location();
