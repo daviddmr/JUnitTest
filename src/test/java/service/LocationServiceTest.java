@@ -6,9 +6,7 @@ import entity.User;
 import exception.MovieOutOfStockException;
 import exception.VideoStoreException;
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 import util.DataUtils;
@@ -16,6 +14,8 @@ import util.DataUtils;
 import java.util.Date;
 
 public class LocationServiceTest {
+
+    private LocationService locationService;
 
     //Used do detect more than one error in the same scope
     //Asserts are not able to recognize possible errors after the first
@@ -26,10 +26,20 @@ public class LocationServiceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
+    @Before
+    public void setup() {
+        System.out.println("Before");
+        locationService = new LocationService();
+    }
+
+    @After
+    public void tearDown() {
+        System.out.println("After");
+    }
+
     @Test
     public void test() throws Exception {
         //scenario
-        LocationService locationService = new LocationService();
         User user = new User("");
         Movie movie = new Movie("Movie 1", 2, 5.0);
 
@@ -56,7 +66,6 @@ public class LocationServiceTest {
     @Test(expected = MovieOutOfStockException.class)
     public void testLocation_MovieWithoutStock() throws Exception {
         //scenario
-        LocationService locationService = new LocationService();
         User user = new User("");
         Movie movie = new Movie("Movie 1", 0, 5.0);
 
@@ -70,7 +79,6 @@ public class LocationServiceTest {
     @Test
     public void testLocation_UserNullException() throws MovieOutOfStockException {
         //scenario
-        LocationService locationService = new LocationService();
         Movie movie = new Movie("Movie 1", 2, 5.0);
 
         //action
@@ -89,7 +97,6 @@ public class LocationServiceTest {
     @Test
     public void testLocation_MovieNullException() throws VideoStoreException, MovieOutOfStockException {
         //scenario
-        LocationService locationService = new LocationService();
         User user = new User("");
 
         expectedException.expect(VideoStoreException.class);
