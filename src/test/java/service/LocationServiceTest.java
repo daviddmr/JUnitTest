@@ -11,10 +11,7 @@ import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 import util.DataUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class LocationServiceTest {
 
@@ -167,5 +164,18 @@ public class LocationServiceTest {
         Location result = locationService.rentMovie(user, movieList);
 
         Assert.assertThat(result.getValue(), CoreMatchers.is(14.0));
+    }
+
+    @Test
+    public void shouldReturnOnlyOnMondayWhenRentAMovieOnSaturday() throws MovieOutOfStockException, VideoStoreException {
+        User user = new User("User 1");
+        List<Movie> movieList = Arrays.asList(
+                new Movie("Movie 1", 2, 4.0),
+                new Movie("Movie 2", 2, 4.0));
+
+        Location result = locationService.rentMovie(user, movieList);
+
+        boolean isMonday = DataUtils.checkWeekDay(result.getReturnDate(), Calendar.MONDAY);
+        Assert.assertTrue(isMonday);
     }
 }

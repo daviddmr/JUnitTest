@@ -5,7 +5,9 @@ import entity.Movie;
 import entity.User;
 import exception.MovieOutOfStockException;
 import exception.VideoStoreException;
+import util.DataUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +40,9 @@ class LocationService {
         //Delivery next day
         Date deliveryDate = new Date();
         deliveryDate = addDays(deliveryDate, 1);
+        if (DataUtils.checkWeekDay(deliveryDate, Calendar.SUNDAY)) {
+            deliveryDate = addDays(deliveryDate, 1);
+        }
         location.setReturnDate(deliveryDate);
 
         return location;
