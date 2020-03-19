@@ -37,6 +37,16 @@ public class LocationServiceTest {
         System.out.println("After");
     }
 
+    @BeforeClass
+    public static void setupClass() {
+        System.out.println("Before class");
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        System.out.println("After class");
+    }
+
     @Test
     public void test() throws Exception {
         //scenario
