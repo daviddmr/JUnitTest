@@ -4,6 +4,7 @@ import entity.Location;
 import entity.Movie;
 import entity.User;
 import exception.MovieOutOfStockException;
+import exception.VideoStoreException;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -49,8 +50,9 @@ public class LocationServiceTest {
         errorCollector.checkThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
     }
 
+    //Elegant exception
     @Test(expected = MovieOutOfStockException.class)
-    public void testMovieWithoutStockWithElegantException() throws Exception {
+    public void testLocation_MovieWithoutStock() throws Exception {
         //scenario
         LocationService locationService = new LocationService();
         User user = new User("");
@@ -60,20 +62,20 @@ public class LocationServiceTest {
         locationService.rentMovie(user, movie);
     }
 
+    //Robust exception
     @Test
-    public void testMovieWithoutStockWithRobustException() {
+    public void testLocation_UserNullException() throws MovieOutOfStockException {
         //scenario
         LocationService locationService = new LocationService();
-        User user = new User("");
         Movie movie = new Movie("Movie 1", 2, 5.0);
 
         //action
         try {
-            locationService.rentMovie(user, movie);
+            locationService.rentMovie(null, movie);
             //To avoid a false-positive
-            Assert.fail("Should trigger a exception");
-        } catch (Exception e) {
-            Assert.assertThat(e.getMessage(), CoreMatchers.is("Movie out of stock"));
+            Assert.fail();
+        } catch (VideoStoreException e) {
+            Assert.assertThat(e.getMessage(), CoreMatchers.is("User null"));
         }
     }
 

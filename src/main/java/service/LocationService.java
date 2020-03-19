@@ -4,6 +4,7 @@ import entity.Location;
 import entity.Movie;
 import entity.User;
 import exception.MovieOutOfStockException;
+import exception.VideoStoreException;
 import org.junit.Assert;
 import org.junit.Test;
 import util.DataUtils;
@@ -14,10 +15,14 @@ import static util.DataUtils.addDays;
 
 class LocationService {
 
-    Location rentMovie(User user, Movie movie) throws Exception {
+    Location rentMovie(User user, Movie movie) throws MovieOutOfStockException, VideoStoreException {
 
         if (movie.getStock() == 0) {
             throw new MovieOutOfStockException();
+        }
+
+        if (user == null) {
+            throw new VideoStoreException("User null");
         }
 
         Location location = new Location();
