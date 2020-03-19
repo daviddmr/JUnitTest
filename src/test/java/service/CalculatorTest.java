@@ -15,4 +15,15 @@ public class CalculatorTest {
 
         Assert.assertEquals(8, result);
     }
+
+    @Test
+    public void shouldSubtractTwoNumbers() {
+        int a = 5;
+        int b = 3;
+
+        Calculator calculator = new Calculator();
+        int result = calculator.sub(a, b);
+
+        Assert.assertEquals(2, result);
+    }
 }
