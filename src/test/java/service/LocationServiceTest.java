@@ -167,6 +167,7 @@ public class LocationServiceTest {
     }
 
     @Test
+    @Ignore
     public void shouldReturnOnlyOnMondayWhenRentAMovieOnSaturday() throws MovieOutOfStockException, VideoStoreException {
         User user = new User("User 1");
         List<Movie> movieList = Arrays.asList(
