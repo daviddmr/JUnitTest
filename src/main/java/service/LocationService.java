@@ -46,6 +46,8 @@ class LocationService {
                 movieLocationPrice = movieLocationPrice * 0.5;
             } else if (i == 4) {
                 movieLocationPrice = movieLocationPrice * 0.25;
+            } else if (i == 5) {
+                movieLocationPrice = movieLocationPrice * 0;
             }
 
             amount += movieLocationPrice;
