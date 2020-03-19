@@ -36,7 +36,7 @@ class LocationService {
         Double amount = 0d;
 
         int movieListSize = movieList.size();
-        for (int i=0; i < movieListSize; i++) {
+        for (int i = 0; i < movieListSize; i++) {
             Movie movie = movieList.get(i);
             Double movieLocationPrice = movie.getLocationPrice();
 
@@ -44,6 +44,8 @@ class LocationService {
                 movieLocationPrice = movieLocationPrice * 0.75;
             } else if (i == 3) {
                 movieLocationPrice = movieLocationPrice * 0.5;
+            } else if (i == 4) {
+                movieLocationPrice = movieLocationPrice * 0.25;
             }
 
             amount += movieLocationPrice;
