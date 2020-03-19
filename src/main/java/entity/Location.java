@@ -1,11 +1,12 @@
 package entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Location {
 
     private User user;
-    private Movie movie;
+    private List<Movie> movieList;
     private Date locationDate;
     private Date returnDate;
     private Double value;
@@ -13,9 +14,9 @@ public class Location {
     public Location() {
     }
 
-    public Location(User user, Movie movie, Date locationDate, Date returnDate, Double value) {
+    public Location(User user, List<Movie> movieList, Date locationDate, Date returnDate, Double value) {
         this.user = user;
-        this.movie = movie;
+        this.movieList = movieList;
         this.locationDate = locationDate;
         this.returnDate = returnDate;
         this.value = value;
@@ -29,12 +30,12 @@ public class Location {
         this.user = user;
     }
 
-    public Movie getMovie() {
-        return movie;
+    public List<Movie> getMovieList() {
+        return movieList;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovieList(List<Movie> movieList) {
+        this.movieList = movieList;
     }
 
     public Date getLocationDate() {

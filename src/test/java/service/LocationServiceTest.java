@@ -11,7 +11,10 @@ import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 import util.DataUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class LocationServiceTest {
 
@@ -35,10 +38,10 @@ public class LocationServiceTest {
     public void test() throws Exception {
         //scenario
         User user = new User("");
-        Movie movie = new Movie("Movie 1", 2, 5.0);
+        List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 2, 5.0));
 
         //action
-        Location location = locationService.rentMovie(user, movie);
+        Location location = locationService.rentMovie(user, movieList);
 
         //verification
         Assert.assertEquals(5.0, location.getValue(), 0.1);
@@ -61,10 +64,10 @@ public class LocationServiceTest {
     public void testLocation_MovieWithoutStock() throws Exception {
         //scenario
         User user = new User("");
-        Movie movie = new Movie("Movie 1", 0, 5.0);
+        List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 0, 5.0));
 
         //action
-        locationService.rentMovie(user, movie);
+        locationService.rentMovie(user, movieList);
     }
 
     /*Robust exception
@@ -73,11 +76,11 @@ public class LocationServiceTest {
     @Test
     public void testLocation_UserNullException() throws MovieOutOfStockException {
         //scenario
-        Movie movie = new Movie("Movie 1", 2, 5.0);
+        List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 2, 5.0));
 
         //action
         try {
-            locationService.rentMovie(null, movie);
+            locationService.rentMovie(null, movieList);
             //To avoid a false-positive
             Assert.fail();
         } catch (VideoStoreException e) {

@@ -7,30 +7,37 @@ import exception.MovieOutOfStockException;
 import exception.VideoStoreException;
 
 import java.util.Date;
+import java.util.List;
 
 import static util.DataUtils.addDays;
 
 class LocationService {
 
-    Location rentMovie(User user, Movie movie) throws MovieOutOfStockException, VideoStoreException {
+    Location rentMovie(User user, List<Movie> movieList) throws MovieOutOfStockException, VideoStoreException {
 
         if (user == null) {
             throw new VideoStoreException("User null");
         }
 
-        if (movie == null) {
+        if (movieList == null || movieList.isEmpty()) {
             throw new VideoStoreException("Movie null");
         }
 
-        if (movie.getStock() == 0) {
-            throw new MovieOutOfStockException();
+        for (Movie movie : movieList) {
+            if (movie.getStock() == 0) {
+                throw new MovieOutOfStockException();
+            }
         }
 
         Location location = new Location();
-        location.setMovie(movie);
+        location.setMovieList(movieList);
         location.setUser(user);
         location.setLocationDate(new Date());
-        location.setValue(movie.getLocationPrice());
+        Double amount = 0d;
+        for (Movie movie : movieList) {
+            amount += movie.getLocationPrice();
+        }
+        location.setValue(amount);
 
         //Delivery next day
         Date deliveryDate = new Date();
