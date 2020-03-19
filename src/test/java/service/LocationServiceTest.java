@@ -35,7 +35,7 @@ public class LocationServiceTest {
     }
 
     @Test
-    public void test() throws Exception {
+    public void shouldRentAMovie() throws Exception {
         //scenario
         User user = new User("");
         List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 2, 5.0));
@@ -61,7 +61,7 @@ public class LocationServiceTest {
     Work well for a situation when just one specific exception will be triggered
     and when do not need the message*/
     @Test(expected = MovieOutOfStockException.class)
-    public void testLocation_MovieWithoutStock() throws Exception {
+    public void shouldNotRentAMovieWithoutStock() throws Exception {
         //scenario
         User user = new User("");
         List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 0, 5.0));
@@ -74,7 +74,7 @@ public class LocationServiceTest {
     Work well when is necessary have more control of the test and have to run
     something after the test. Util too when need the message*/
     @Test
-    public void testLocation_UserNullException() throws MovieOutOfStockException {
+    public void shouldNotRentAMovieWithoutUser() throws MovieOutOfStockException {
         //scenario
         List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 2, 5.0));
 
@@ -92,7 +92,7 @@ public class LocationServiceTest {
     Work well in almost every cases, but sometimes if want more control, the Robust exception is better.
     Util too when need the message*/
     @Test
-    public void testLocation_MovieNullException() throws VideoStoreException, MovieOutOfStockException {
+    public void shouldNotRentAMovieWithoutMovie() throws VideoStoreException, MovieOutOfStockException {
         //scenario
         User user = new User("");
 
