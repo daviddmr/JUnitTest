@@ -53,4 +53,21 @@ public class LocationServiceTest {
         //action
         locationService.rentMovie(user, movie);
     }
+
+    @Test
+    public void testMovieWithoutStockWithRobustException() {
+        //scenario
+        LocationService locationService = new LocationService();
+        User user = new User("");
+        Movie movie = new Movie("Movie 1", 2, 5.0);
+
+        //action
+        try {
+            locationService.rentMovie(user, movie);
+            //To avoid a false-positive
+            Assert.fail("Should trigger a exception");
+        } catch (Exception e) {
+            Assert.assertThat(e.getMessage(), CoreMatchers.is("Movie out of stock"));
+        }
+    }
 }
