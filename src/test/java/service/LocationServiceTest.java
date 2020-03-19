@@ -50,7 +50,9 @@ public class LocationServiceTest {
         errorCollector.checkThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
     }
 
-    //Elegant exception
+    /*Elegant exception
+    Work well for a situation when just one specific exception will be triggered
+    and when do not need the message*/
     @Test(expected = MovieOutOfStockException.class)
     public void testLocation_MovieWithoutStock() throws Exception {
         //scenario
@@ -62,7 +64,9 @@ public class LocationServiceTest {
         locationService.rentMovie(user, movie);
     }
 
-    //Robust exception
+    /*Robust exception
+    Work well when is necessary have more control of the test and have to run
+    something after the test. Util too when need the message*/
     @Test
     public void testLocation_UserNullException() throws MovieOutOfStockException {
         //scenario
@@ -79,7 +83,9 @@ public class LocationServiceTest {
         }
     }
 
-    //Modern exception
+    /*Modern exception
+    Work well in almost every cases, but sometimes if want more control, the Robust exception is better.
+    Util too when need the message*/
     @Test
     public void testLocation_MovieNullException() throws VideoStoreException, MovieOutOfStockException {
         //scenario
