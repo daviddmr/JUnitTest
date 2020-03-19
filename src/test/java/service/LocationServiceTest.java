@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
+import org.junit.rules.ExpectedException;
 import util.DataUtils;
 
 import java.util.Date;
@@ -18,6 +19,10 @@ public class LocationServiceTest {
     //Asserts are not able to recognize possible errors after the first
     @Rule
     public ErrorCollector errorCollector = new ErrorCollector();
+
+    //Used at modern exception
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void test() throws Exception {
@@ -69,5 +74,19 @@ public class LocationServiceTest {
         } catch (Exception e) {
             Assert.assertThat(e.getMessage(), CoreMatchers.is("Movie out of stock"));
         }
+    }
+
+    @Test
+    public void testMovieWithoutStockWithModernException() throws Exception {
+        //scenario
+        LocationService locationService = new LocationService();
+        User user = new User("");
+        Movie movie = new Movie("Movie 1", 0, 5.0);
+
+        expectedException.expect(Exception.class);
+        expectedException.expectMessage("Movie out of stock");
+
+        //action
+        locationService.rentMovie(user, movie);
     }
 }
