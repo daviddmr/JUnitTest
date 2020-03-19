@@ -1,12 +1,22 @@
 package service;
 
-public class Calculator {
+import exception.DivideNumberByZeroException;
 
-    public int sum(int a, int b) {
+class Calculator {
+
+    int sum(int a, int b) {
         return a + b;
     }
 
-    public int sub(int a, int b) {
+    int sub(int a, int b) {
         return a - b;
+    }
+
+    int divide(int a, int b) throws DivideNumberByZeroException {
+        if(b == 0) {
+            throw new DivideNumberByZeroException();
+        }
+
+        return a / b;
     }
 }
