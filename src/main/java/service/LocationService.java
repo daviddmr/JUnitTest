@@ -33,26 +33,7 @@ class LocationService {
         location.setMovieList(movieList);
         location.setUser(user);
         location.setLocationDate(new Date());
-        Double amount = 0d;
-
-        int movieListSize = movieList.size();
-        for (int i = 0; i < movieListSize; i++) {
-            Movie movie = movieList.get(i);
-            Double movieLocationPrice = movie.getLocationPrice();
-
-            if (i == 2) {
-                movieLocationPrice = movieLocationPrice * 0.75;
-            } else if (i == 3) {
-                movieLocationPrice = movieLocationPrice * 0.5;
-            } else if (i == 4) {
-                movieLocationPrice = movieLocationPrice * 0.25;
-            } else if (i == 5) {
-                movieLocationPrice = movieLocationPrice * 0;
-            }
-
-            amount += movieLocationPrice;
-        }
-        location.setValue(amount);
+        location.setValue(calculateDiscountOnPrice(movieList));
 
         //Delivery next day
         Date deliveryDate = new Date();
@@ -60,5 +41,32 @@ class LocationService {
         location.setReturnDate(deliveryDate);
 
         return location;
+    }
+
+    private Double calculateDiscountOnPrice(List<Movie> movieList) {
+        Double amount = 0d;
+        int movieListSize = movieList.size();
+        for (int i = 0; i < movieListSize; i++) {
+            Movie movie = movieList.get(i);
+            Double movieLocationPrice = movie.getLocationPrice();
+
+            switch (i) {
+                case 2:
+                    movieLocationPrice = movieLocationPrice * 0.75;
+                    break;
+                case 3:
+                    movieLocationPrice = movieLocationPrice * 0.5;
+                    break;
+                case 4:
+                    movieLocationPrice = movieLocationPrice * 0.25;
+                    break;
+                case 5:
+                    movieLocationPrice = 0d;
+                    break;
+            }
+
+            amount += movieLocationPrice;
+        }
+        return amount;
     }
 }
