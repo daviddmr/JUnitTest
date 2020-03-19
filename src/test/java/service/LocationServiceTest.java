@@ -16,6 +16,7 @@ import java.util.Date;
 public class LocationServiceTest {
 
     private LocationService locationService;
+    private static int counter;
 
     //Used do detect more than one error in the same scope
     //Asserts are not able to recognize possible errors after the first
@@ -28,18 +29,18 @@ public class LocationServiceTest {
 
     @Before
     public void setup() {
-        System.out.println("Before");
         locationService = new LocationService();
     }
 
     @After
     public void tearDown() {
-        System.out.println("After");
+        counter++;
+        System.out.println("Counter " + counter);
     }
 
     @BeforeClass
     public static void setupClass() {
-        System.out.println("Before class");
+        counter = 0;
     }
 
     @AfterClass
