@@ -34,8 +34,17 @@ class LocationService {
         location.setUser(user);
         location.setLocationDate(new Date());
         Double amount = 0d;
-        for (Movie movie : movieList) {
-            amount += movie.getLocationPrice();
+
+        int movieListSize = movieList.size();
+        for (int i=0; i < movieListSize; i++) {
+            Movie movie = movieList.get(i);
+            Double movieLocationPrice = movie.getLocationPrice();
+
+            if (i == 2) {
+                movieLocationPrice = movieLocationPrice * 0.75;
+            }
+
+            amount += movieLocationPrice;
         }
         location.setValue(amount);
 
