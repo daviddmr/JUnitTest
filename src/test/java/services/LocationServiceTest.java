@@ -1,5 +1,6 @@
 package services;
 
+import builders.MovieBuilder;
 import entities.Location;
 import entities.Movie;
 import entities.User;
@@ -41,15 +42,15 @@ public class LocationServiceTest {
 
         //scenario
         User user = new User("");
-        List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 2, 5.0));
+        List<Movie> movieList = Arrays.asList(MovieBuilder.getMovie().build());
 
         //action
         Location location = locationService.rentMovie(user, movieList);
 
         //verification
-        Assert.assertEquals(5.0, location.getValue(), 0.1);
-        Assert.assertThat(location.getValue(), CoreMatchers.is(CoreMatchers.equalTo(5.0)));
-        errorCollector.checkThat(location.getValue(), CoreMatchers.is(CoreMatchers.equalTo(5.0)));
+        Assert.assertEquals(4.0, location.getValue(), 0.1);
+        Assert.assertThat(location.getValue(), CoreMatchers.is(CoreMatchers.equalTo(4.0)));
+        errorCollector.checkThat(location.getValue(), CoreMatchers.is(CoreMatchers.equalTo(4.0)));
 
         Assert.assertTrue(DataUtils.isSameDate(location.getLocationDate(), new Date()));
         Assert.assertThat(DataUtils.isSameDate(location.getLocationDate(), new Date()), CoreMatchers.is(true));
@@ -71,7 +72,7 @@ public class LocationServiceTest {
     public void shouldNotRentAMovieWithoutStock() throws Exception {
         //scenario
         User user = new User("");
-        List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 0, 5.0));
+        List<Movie> movieList = Arrays.asList(MovieBuilder.getMovie().build());
 
         //action
         locationService.rentMovie(user, movieList);
@@ -83,7 +84,7 @@ public class LocationServiceTest {
     @Test
     public void shouldNotRentAMovieWithoutUser() throws MovieOutOfStockException {
         //scenario
-        List<Movie> movieList = Arrays.asList(new Movie("Movie 1", 2, 5.0));
+        List<Movie> movieList = Arrays.asList(MovieBuilder.getMovie().build());
 
         //action
         try {
@@ -116,8 +117,8 @@ public class LocationServiceTest {
 
         User user = new User("User 1");
         List<Movie> movieList = Arrays.asList(
-                new Movie("Movie 1", 2, 4.0),
-                new Movie("Movie 2", 2, 4.0));
+                MovieBuilder.getMovie().build(),
+                MovieBuilder.getMovie().build());
 
         Location result = locationService.rentMovie(user, movieList);
 

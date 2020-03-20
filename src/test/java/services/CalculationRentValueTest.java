@@ -1,5 +1,6 @@
 package services;
 
+import builders.MovieBuilder;
 import entities.Location;
 import entities.Movie;
 import entities.User;
@@ -35,13 +36,13 @@ public class CalculationRentValueTest {
         locationService = new LocationService();
     }
 
-    private static Movie movie1 = new Movie("Movie 1", 2, 4.0);
-    private static Movie movie2 = new Movie("Movie 2", 2, 4.0);
-    private static Movie movie3 = new Movie("Movie 3", 2, 4.0);
-    private static Movie movie4 = new Movie("Movie 4", 2, 4.0);
-    private static Movie movie5 = new Movie("Movie 5", 2, 4.0);
-    private static Movie movie6 = new Movie("Movie 6", 2, 4.0);
-    private static Movie movie7 = new Movie("Movie 6", 2, 4.0);
+    private static Movie movie1 = MovieBuilder.getMovie().build();
+    private static Movie movie2 = MovieBuilder.getMovie().build();
+    private static Movie movie3 = MovieBuilder.getMovie().build();
+    private static Movie movie4 = MovieBuilder.getMovie().build();
+    private static Movie movie5 = MovieBuilder.getMovie().build();
+    private static Movie movie6 = MovieBuilder.getMovie().build();
+    private static Movie movie7 = MovieBuilder.getMovie().build();
 
     @Parameterized.Parameters(name = "{2}")
     public static Collection<Object[]> getParameters() {
