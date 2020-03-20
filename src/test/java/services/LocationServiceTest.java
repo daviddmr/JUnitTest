@@ -72,7 +72,7 @@ public class LocationServiceTest {
     public void shouldNotRentAMovieWithoutStock() throws Exception {
         //scenario
         User user = new User("");
-        List<Movie> movieList = Arrays.asList(MovieBuilder.getMovie().build());
+        List<Movie> movieList = Arrays.asList(MovieBuilder.getMovie().withoutStock().build());
 
         //action
         locationService.rentMovie(user, movieList);

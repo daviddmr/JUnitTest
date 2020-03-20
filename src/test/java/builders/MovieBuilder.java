@@ -19,6 +19,11 @@ public class MovieBuilder {
         return builder;
     }
 
+    public MovieBuilder withoutStock() {
+        movie.setStock(0);
+        return this;
+    }
+
     public Movie build() {
         return movie;
     }
