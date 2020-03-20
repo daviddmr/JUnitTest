@@ -1,10 +1,10 @@
-package service;
+package services;
 
-import entity.Location;
-import entity.Movie;
-import entity.User;
-import exception.MovieOutOfStockException;
-import exception.VideoStoreException;
+import entities.Location;
+import entities.Movie;
+import entities.User;
+import exceptions.MovieOutOfStockException;
+import exceptions.VideoStoreException;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;

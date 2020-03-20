@@ -1,6 +1,6 @@
-package service;
+package services;
 
-import exception.DivideNumberByZeroException;
+import exceptions.DivideNumberByZeroException;
 
 class Calculator {
 

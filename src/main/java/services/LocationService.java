@@ -1,17 +1,17 @@
-package service;
+package services;
 
-import entity.Location;
-import entity.Movie;
-import entity.User;
-import exception.MovieOutOfStockException;
-import exception.VideoStoreException;
-import util.DataUtils;
+import entities.Location;
+import entities.Movie;
+import entities.User;
+import exceptions.MovieOutOfStockException;
+import exceptions.VideoStoreException;
+import utils.DataUtils;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static util.DataUtils.addDays;
+import static utils.DataUtils.addDays;
 
 class LocationService {
 
