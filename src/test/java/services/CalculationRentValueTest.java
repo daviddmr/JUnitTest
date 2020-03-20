@@ -1,6 +1,7 @@
 package services;
 
 import builders.MovieBuilder;
+import builders.UserBuilder;
 import entities.Location;
 import entities.Movie;
 import entities.User;
@@ -58,7 +59,7 @@ public class CalculationRentValueTest {
 
     @Test
     public void shouldCalculateRentValueConsideringDiscounts() throws VideoStoreException, MovieOutOfStockException {
-        User user = new User("User 1");
+        User user = UserBuilder.getUser().build();
         Location result = locationService.rentMovie(user, movieList);
 
         Assert.assertThat(result.getValue(), CoreMatchers.is(locationAmount));

@@ -1,6 +1,7 @@
 package services;
 
 import builders.MovieBuilder;
+import builders.UserBuilder;
 import entities.Location;
 import entities.Movie;
 import entities.User;
@@ -41,7 +42,7 @@ public class LocationServiceTest {
         Assume.assumeFalse(DataUtils.checkWeekDay(new Date(), Calendar.SATURDAY));
 
         //scenario
-        User user = new User("");
+        User user = UserBuilder.getUser().build();
         List<Movie> movieList = Arrays.asList(MovieBuilder.getMovie().build());
 
         //action
@@ -71,7 +72,7 @@ public class LocationServiceTest {
     @Test(expected = MovieOutOfStockException.class)
     public void shouldNotRentAMovieWithoutStock() throws Exception {
         //scenario
-        User user = new User("");
+        User user = UserBuilder.getUser().build();
         List<Movie> movieList = Arrays.asList(MovieBuilder.getMovie().withoutStock().build());
 
         //action
@@ -102,7 +103,7 @@ public class LocationServiceTest {
     @Test
     public void shouldNotRentAMovieWithoutMovie() throws VideoStoreException, MovieOutOfStockException {
         //scenario
-        User user = new User("");
+        User user = UserBuilder.getUser().build();
 
         expectedException.expect(VideoStoreException.class);
         expectedException.expectMessage("Movie null");
@@ -115,7 +116,7 @@ public class LocationServiceTest {
     public void shouldReturnOnlyOnMondayWhenRentAMovieOnSaturday() throws MovieOutOfStockException, VideoStoreException {
         Assume.assumeTrue(DataUtils.checkWeekDay(new Date(), Calendar.SATURDAY));
 
-        User user = new User("User 1");
+        User user = UserBuilder.getUser().build();
         List<Movie> movieList = Arrays.asList(
                 MovieBuilder.getMovie().build(),
                 MovieBuilder.getMovie().build());
