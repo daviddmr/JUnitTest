@@ -46,6 +46,7 @@ public class CalculationRentValueTest {
     @Parameterized.Parameters(name = "{2}")
     public static Collection<Object[]> getParameters() {
         return Arrays.asList(new Object[][]{
+                {Arrays.asList(movie1, movie2), 8.0, "2 Movies - No discount"},
                 {Arrays.asList(movie1, movie2, movie3), 11.0, "3 Movies - 25%"},
                 {Arrays.asList(movie1, movie2, movie3, movie4), 13.0, "4 Movies - 50%"},
                 {Arrays.asList(movie1, movie2, movie3, movie4, movie5), 14.0, "5 Movies - 75%"},
