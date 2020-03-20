@@ -11,4 +11,12 @@ public class CustomMatchers {
     public static WeekDayMatcher isMonday() {
         return new WeekDayMatcher(Calendar.MONDAY);
     }
+
+    public static DateDifferenceDaysMatcher isTodayWithDifferenceOf(Integer quantityOfDays) {
+        return new DateDifferenceDaysMatcher(quantityOfDays);
+    }
+
+    public static DateDifferenceDaysMatcher isToday() {
+        return new DateDifferenceDaysMatcher(0);
+    }
 }

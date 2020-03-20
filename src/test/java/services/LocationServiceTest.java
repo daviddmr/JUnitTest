@@ -6,7 +6,6 @@ import entities.User;
 import exceptions.MovieOutOfStockException;
 import exceptions.VideoStoreException;
 import matchers.CustomMatchers;
-import matchers.DateDifferenceDaysMatcher;
 import org.hamcrest.CoreMatchers;
 import org.junit.*;
 import org.junit.rules.ErrorCollector;
@@ -61,8 +60,8 @@ public class LocationServiceTest {
         errorCollector.checkThat(DataUtils.isSameDate(location.getReturnDate(), DataUtils.getDifferenceBetweenToDays(1)), CoreMatchers.is(true));
 
         //Using Custom Matchers
-        errorCollector.checkThat(location.getLocationDate(), new DateDifferenceDaysMatcher(0));
-        errorCollector.checkThat(location.getReturnDate(), new DateDifferenceDaysMatcher(1));
+        errorCollector.checkThat(location.getLocationDate(), CustomMatchers.isToday());
+        errorCollector.checkThat(location.getReturnDate(), CustomMatchers.isTodayWithDifferenceOf(1));
     }
 
     /*Elegant exception
