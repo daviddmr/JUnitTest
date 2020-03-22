@@ -6,14 +6,16 @@ import entities.User;
 import exceptions.MovieOutOfStockException;
 import exceptions.VideoStoreException;
 import matchers.CustomMatchers;
-import matchers.WeekDayMatcher;
 import org.hamcrest.CoreMatchers;
 import org.junit.*;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 import utils.DataUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class LocationServiceTest {
 
@@ -115,10 +117,6 @@ public class LocationServiceTest {
 
         Location result = locationService.rentMovie(user, movieList);
 
-//        boolean isMonday = DataUtils.checkWeekDay(result.getReturnDate(), Calendar.MONDAY);
-//        Assert.assertTrue(isMonday);
-
-        Assert.assertThat(result.getReturnDate(), CustomMatchers.dayIs(Calendar.MONDAY));
         Assert.assertThat(result.getReturnDate(), CustomMatchers.isMonday());
     }
 }
