@@ -5,6 +5,7 @@ import entities.Movie;
 import entities.User;
 import exceptions.MovieOutOfStockException;
 import exceptions.VideoStoreException;
+import matchers.CustomMatchers;
 import matchers.WeekDayMatcher;
 import org.hamcrest.CoreMatchers;
 import org.junit.*;
@@ -117,6 +118,6 @@ public class LocationServiceTest {
 //        boolean isMonday = DataUtils.checkWeekDay(result.getReturnDate(), Calendar.MONDAY);
 //        Assert.assertTrue(isMonday);
 
-        Assert.assertThat(result.getReturnDate(), new WeekDayMatcher(Calendar.MONDAY));
+        Assert.assertThat(result.getReturnDate(), CustomMatchers.dayIs(Calendar.MONDAY));
     }
 }
