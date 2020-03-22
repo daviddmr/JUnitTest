@@ -119,5 +119,6 @@ public class LocationServiceTest {
 //        Assert.assertTrue(isMonday);
 
         Assert.assertThat(result.getReturnDate(), CustomMatchers.dayIs(Calendar.MONDAY));
+        Assert.assertThat(result.getReturnDate(), CustomMatchers.isMonday());
     }
 }
